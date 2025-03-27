@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj06wfs030x45"]
+
+[ext_resource type="Texture2D" uid="uid://bn3uqa7wxeev1" path="res://sword_fantasy/personagem/acoes_padrao.png" id="1_8xoef"]
+[ext_resource type="Script" uid="uid://jn5hrfg8x87q" path="res://sword_fantasy/personagem/personagem.gd" id="1_37cyp"]
+
+[node name="Personagem" type="CharacterBody2D"]
+script = ExtResource("1_37cyp")
+
+[node name="textura" type="Sprite2D" parent="."]
+texture = ExtResource("1_8xoef")
