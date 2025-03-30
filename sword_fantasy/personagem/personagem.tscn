@@ -609,6 +609,7 @@ _data = {
 
 [node name="Personagem" type="CharacterBody2D" node_paths=PackedStringArray("_animador_do_personagem")]
 script = ExtResource("1_37cyp")
+_velocidade_de_movimento = 96.0
 _animador_do_personagem = NodePath("AnimadorDoPersonagem")
 
 [node name="textura" type="Sprite2D" parent="."]
