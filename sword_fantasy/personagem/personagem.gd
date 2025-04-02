@@ -1,9 +1,12 @@
 extends CharacterBody2D
 
+var _pode_atacar: bool = true
 var _sufixo_da_animacao: String = "_baixo"
 
 @export var _velocidade_de_movimento: float = 128.0
 @export var _animador_do_personagem: AnimationPlayer
+@export var _temporizador_de_acoes: Timer
+
 
 func _physics_process(delta: float) -> void:
 	var direcao = Input.get_vector(
@@ -14,6 +17,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	_sufixo_da_animacao = _sufixo_do_personagem()
+	_atacar()
 	_animar()
 
 func _sufixo_do_personagem() -> String:
@@ -34,9 +38,24 @@ func _sufixo_do_personagem() -> String:
 	
 	return _sufixo_da_animacao
 
+func _atacar() -> void:
+	if Input.is_action_just_pressed("atacar") and _pode_atacar:
+		_animador_do_personagem.play("atacando" + _sufixo_da_animacao)
+		set_physics_process(false)
+		_temporizador_de_acoes.start(0.4)
+		_pode_atacar = false
+
 func _animar() -> void:
+	if _pode_atacar == false:
+		return
+	
 	if velocity:
 		_animador_do_personagem.play("andando" + _sufixo_da_animacao)
 		return
 	
 	_animador_do_personagem.play("parado" + _sufixo_da_animacao)
+
+
+func _on_temporizador_de_acoes_timeout() -> void:
+	set_physics_process(true)
+	_pode_atacar = true
