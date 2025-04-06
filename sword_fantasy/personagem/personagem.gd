@@ -6,6 +6,7 @@ var _sufixo_da_animacao: String = "_baixo"
 @export var _velocidade_de_movimento: float = 128.0
 @export var _animador_do_personagem: AnimationPlayer
 @export var _temporizador_de_acoes: Timer
+@export var _area_de_ataque: Area2D
 
 
 func _physics_process(delta: float) -> void:
@@ -24,16 +25,20 @@ func _sufixo_do_personagem() -> String:
 	var _acao_horizontal: float = Input.get_axis("mover_esquerda", "mover_direita")
 	
 	if _acao_horizontal == -1:
+		_area_de_ataque.position = Vector2(-15, -8)
 		return "_esquerda"
 		
 	if _acao_horizontal == +1:
+		_area_de_ataque.position = Vector2(+15, -8)
 		return "_direita"
 	
 	var _acao_vertical: float = Input.get_axis("mover_cima", "mover_baixo")
 	if _acao_vertical == -1:
+		_area_de_ataque.position = Vector2(0, -22)
 		return "_cima"
 	
 	if _acao_vertical == +1:
+		_area_de_ataque.position = Vector2(0, 5)
 		return "_baixo"
 	
 	return _sufixo_da_animacao
