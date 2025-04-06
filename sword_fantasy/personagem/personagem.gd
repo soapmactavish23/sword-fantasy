@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+var _arma_atual: String = "espada"
+
 var _pode_atacar: bool = true
 var _sufixo_da_animacao: String = "_baixo"
 
@@ -45,7 +47,7 @@ func _sufixo_do_personagem() -> String:
 
 func _atacar() -> void:
 	if Input.is_action_just_pressed("atacar") and _pode_atacar:
-		_animador_do_personagem.play("atacando" + _sufixo_da_animacao)
+		_animador_do_personagem.play("atacando_" + _arma_atual + _sufixo_da_animacao)
 		set_physics_process(false)
 		_temporizador_de_acoes.start(0.4)
 		_pode_atacar = false
