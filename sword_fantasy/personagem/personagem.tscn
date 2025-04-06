@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cj06wfs030x45"]
+[gd_scene load_steps=36 format=3 uid="uid://cj06wfs030x45"]
 
 [ext_resource type="Texture2D" uid="uid://bn3uqa7wxeev1" path="res://sword_fantasy/personagem/acoes_padrao.png" id="1_8xoef"]
 [ext_resource type="Script" uid="uid://jn5hrfg8x87q" path="res://sword_fantasy/personagem/personagem.gd" id="1_37cyp"]
@@ -2174,12 +2174,16 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_37cyp"]
 
-[node name="Personagem" type="CharacterBody2D" node_paths=PackedStringArray("_animador_do_personagem", "_temporizador_de_acoes", "_area_de_ataque")]
+[sub_resource type="LabelSettings" id="LabelSettings_baikd"]
+font_size = 8
+
+[node name="Personagem" type="CharacterBody2D" node_paths=PackedStringArray("_animador_do_personagem", "_temporizador_de_acoes", "_area_de_ataque", "_texto_arma_atual")]
 script = ExtResource("1_37cyp")
 _velocidade_de_movimento = 96.0
 _animador_do_personagem = NodePath("AnimadorDoPersonagem")
 _temporizador_de_acoes = NodePath("TemporizadorDeAcoes")
 _area_de_ataque = NodePath("AreaDeAtaque")
+_texto_arma_atual = NodePath("Label")
 
 [node name="textura" type="Sprite2D" parent="."]
 position = Vector2(0.5, -7)
@@ -2201,5 +2205,22 @@ one_shot = true
 position = Vector2(0, 7)
 shape = SubResource("CircleShape2D_37cyp")
 disabled = true
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(80, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -31.0
+offset_right = 40.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Espada"
+label_settings = SubResource("LabelSettings_baikd")
+horizontal_alignment = 1
 
 [connection signal="timeout" from="TemporizadorDeAcoes" to="." method="_on_temporizador_de_acoes_timeout"]
