@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var _arma_atual: String = "machado"
+var _arma_atual: String = "espada"
 
 var _pode_atacar: bool = true
 var _sufixo_da_animacao: String = "_baixo"
@@ -12,7 +12,7 @@ var _sufixo_da_animacao: String = "_baixo"
 @export var _texto_arma_atual: Label
 
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	var direcao = Input.get_vector(
 		"mover_esquerda", "mover_direita", "mover_cima", "mover_baixo"
 	)
@@ -50,7 +50,7 @@ func _sufixo_do_personagem() -> String:
 func _definir_arma_atual() -> void:
 	if Input.is_action_just_pressed("espada"):
 		_arma_atual = "espada"
-	if Input.is_action_just_pressed("picareta"):
+	if Input.is_action_just_pressed("machado"):
 		_arma_atual = "machado"
 	if Input.is_action_just_pressed("picareta"):
 		_arma_atual = "picareta"
@@ -62,8 +62,10 @@ func _definir_arma_atual() -> void:
 
 func _atacar() -> void:
 	if Input.is_action_just_pressed("atacar") and _pode_atacar:
-		_animador_do_personagem.play("atacando_" + _arma_atual + _sufixo_da_animacao)
-		set_physics_process(false)
+		var nome_animacao = "atacando_" + _arma_atual + _sufixo_da_animacao
+		print(nome_animacao)
+		_animador_do_personagem.play(nome_animacao)
+		set_process(false)
 		_temporizador_de_acoes.start(0.4)
 		_pode_atacar = false
 
@@ -79,5 +81,5 @@ func _animar() -> void:
 
 
 func _on_temporizador_de_acoes_timeout() -> void:
-	set_physics_process(true)
+	set_process(true)
 	_pode_atacar = true
